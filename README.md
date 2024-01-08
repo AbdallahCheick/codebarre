@@ -19,8 +19,6 @@ acceder a l'application : http://localhost/codebarre/camera
 
 # Aperçu de application
 
-![alt text]([http://url/to/img.png](https://github.com/AbdallahCheick/codebarre/blob/main/camera.png)
-
 <p align="center">
   <img src="https://github.com/AbdallahCheick/codebarre/blob/main/camera.png" width="600" title="Aperçu de la camera">
 </p>
