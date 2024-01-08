@@ -18,3 +18,5 @@ python scan.py
 acceder a l'application : http://localhost/codebarre/camera
 
 # Aperçu de application
+
+![alt text]([http://url/to/img.png](https://github.com/AbdallahCheick/codebarre/blob/main/camera.png)
