@@ -22,6 +22,5 @@ acceder a l'application : http://localhost/codebarre/camera
 ![alt text]([http://url/to/img.png](https://github.com/AbdallahCheick/codebarre/blob/main/camera.png)
 
 <p align="center">
-  <img src="https://github.com/AbdallahCheick/codebarre/blob/main/camera.png" width="350" title="hover text">
-  <img src="your_relative_path_here_number_2_large_name" width="350" alt="accessibility text">
+  <img src="https://github.com/AbdallahCheick/codebarre/blob/main/camera.png" width="600" title="Aperçu de la camera">
 </p>
