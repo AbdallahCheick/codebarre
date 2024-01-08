@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-barres Scanner</title>
+</head>
+<body>
+    <h1>Code-barres Scanner</h1>
+    <video id="camera" width="640" height="480" autoplay></video>
+    <button id="captureButton">Prendre une photo</button>
+    <div id="resultat"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const video = document.getElementById('camera');
+            const captureButton = document.getElementById('captureButton');
+            const resultatDiv = document.getElementById('resultat');
+
+            // Ouvrir la caméra
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error('Erreur lors de l\'accès à la caméra : ', error);
+                });
+
+            // Prendre une photo lorsque le bouton est cliqué
+            captureButton.addEventListener('click', () => {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                // Redimensionner le canvas pour correspondre à la taille de la vidéo
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Copier le cadre vidéo dans le canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convertir le canvas en base64
+                const imageData = canvas.toDataURL('image/jpeg');
+
+                // Envoyer l'image à l'API Flask
+                envoyerImage(imageData);
+            });
+
+            function envoyerImage(imageData) {
+                // Utilisation d'AJAX pour envoyer l'image à l'API REST Python
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://localhost:5000/scan', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        resultatDiv.innerHTML = '<p>Résultat du scanner : ' + xhr.responseText + '</p>';
+                    } else {
+                        console.error('Erreur lors de la requête HTTP.');
+                    }
+                };
+
+                // Envoyer l'image au format JSON
+                xhr.send(JSON.stringify({ image: imageData }));
+            }
+        });
+    </script>
+</body>
+</html>
